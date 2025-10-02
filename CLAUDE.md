@@ -39,11 +39,19 @@ npm run lint
 
 ### Spec-Kit Integration
 This project includes `.specify/` directory with:
-- Project constitution template (`memory/constitution.md`)
+- Project constitution (`.specify/memory/constitution.md` v1.0.0)
 - Development templates (spec, plan, tasks, agent-file)
 - PowerShell automation scripts for feature creation and planning
 
 Use the `/specify`, `/plan`, `/clarify`, `/tasks`, `/analyze`, and `/implement` slash commands for spec-driven development workflows.
+
+### Constitutional Principles
+This project follows a formal constitution defining non-negotiable development standards. See `.specify/memory/constitution.md` for details. Key principles:
+1. **Clean & Modular Code** - Single responsibility, small testable units
+2. **Next.js 15 Best Practices** - App Router, Server Components by default, proper optimizations
+3. **Type Safety** - Strict TypeScript, no `any` without justification
+4. **Component Architecture** - Server-first, feature-based organization
+5. **Performance & Optimization** - Use Next.js built-ins (Image, Font, lazy loading)
 
 ## Notes
 - All builds and dev commands use Turbopack (`--turbopack` flag)
