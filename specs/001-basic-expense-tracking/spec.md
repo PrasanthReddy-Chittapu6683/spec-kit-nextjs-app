@@ -52,6 +52,15 @@ When creating this spec from a user prompt:
 
 ---
 
+## Clarifications
+
+### Session 2025-10-01
+- Q: Should expense categories be fixed or user-customizable? → A: Fixed predefined list (Food, Transport, Entertainment, Utilities, Healthcare, Other)
+- Q: What totals should the dashboard display? → A: Overall total + breakdown by category + current month total + last 7 days total
+- Q: Should the expense list sort show newest or oldest expenses first? → A: Newest first (most recent date at top)
+- Q: Should future-dated expenses be allowed? → A: Yes - allow future dates
+- Q: How many recent expenses should the dashboard display? → A: all
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### Primary User Story
@@ -65,33 +74,36 @@ As a personal user, I want to track my daily expenses by recording the amount, d
 5. **Given** the user has multiple expenses in different categories, **When** they view the dashboard, **Then** they should see totals grouped by relevant metrics (e.g., total amount, category breakdown)
 
 ### Edge Cases
-- What happens when the user tries to add an expense with a negative amount?
-- What happens when the user tries to add an expense with a future date?
+- What happens when the user tries to add an expense with a negative amount? (System rejects it per FR-002)
 - How does the system handle deleting the last expense in the list?
 - What happens if the user tries to submit an expense form with missing required fields?
-- How many recent expenses should be shown on the dashboard by default?
+- How should the system handle displaying a large number of expenses? (All expenses are shown, sorted newest first)
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 - **FR-001**: System MUST allow users to add a new expense with amount, date, category, and description fields
 - **FR-002**: System MUST validate that amount is a positive number
-- **FR-003**: System MUST validate that date is provided and not in the future (or allow future dates - [NEEDS CLARIFICATION: should future-dated expenses be allowed?])
+- **FR-003**: System MUST validate that date is provided (past, present, or future dates are allowed)
 - **FR-004**: System MUST require amount, date, and category as mandatory fields
 - **FR-005**: System MUST treat description as an optional field
 - **FR-006**: System MUST persist all added expenses
-- **FR-007**: System MUST display a list of recent expenses on the dashboard showing all expense details (amount, date, category, description)
-- **FR-008**: System MUST calculate and display basic totals on the dashboard (e.g., total amount spent, [NEEDS CLARIFICATION: which other totals are needed - by category, by time period, overall?])
+- **FR-007**: System MUST display all expenses on the dashboard showing all expense details (amount, date, category, description)
+- **FR-008**: System MUST calculate and display the following totals on the dashboard:
+  - Overall total (sum of all expenses)
+  - Breakdown by category (sum per category: Food, Transport, Entertainment, Utilities, Healthcare, Other)
+  - Current month total (sum of expenses in current calendar month)
+  - Last 7 days total (sum of expenses in the last 7 days including today)
 - **FR-009**: Users MUST be able to delete any expense from the list
 - **FR-010**: System MUST update dashboard totals immediately after adding or deleting an expense
-- **FR-011**: System MUST provide a predefined set of expense categories (e.g., Food, Transport, Entertainment, Utilities, Healthcare, Other) or allow custom categories ([NEEDS CLARIFICATION: fixed categories or user-defined?])
-- **FR-012**: System MUST sort expenses by date (most recent first) on the dashboard ([NEEDS CLARIFICATION: sorting order preference?])
+- **FR-011**: System MUST provide a fixed predefined set of expense categories: Food, Transport, Entertainment, Utilities, Healthcare, Other
+- **FR-012**: System MUST sort expenses by date with newest first (most recent date at top) on the dashboard
 
 ### Key Entities *(include if feature involves data)*
 - **Expense**: Represents a single personal expense with the following attributes:
   - Amount: Monetary value of the expense (required, positive number)
   - Date: When the expense occurred (required)
-  - Category: Classification of the expense type (required)
+  - Category: Classification of the expense type (required, must be one of: Food, Transport, Entertainment, Utilities, Healthcare, Other)
   - Description: Additional details about the expense (optional, text)
 
 ---
@@ -106,7 +118,7 @@ As a personal user, I want to track my daily expenses by recording the amount, d
 - [x] All mandatory sections completed
 
 ### Requirement Completeness
-- [ ] No [NEEDS CLARIFICATION] markers remain
+- [x] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
 - [x] Scope is clearly bounded
@@ -123,6 +135,6 @@ As a personal user, I want to track my daily expenses by recording the amount, d
 - [x] User scenarios defined
 - [x] Requirements generated
 - [x] Entities identified
-- [ ] Review checklist passed (pending clarifications)
+- [x] Review checklist passed
 
 ---
