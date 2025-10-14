@@ -53,6 +53,62 @@ This project follows a formal constitution defining non-negotiable development s
 4. **Component Architecture** - Server-first, feature-based organization
 5. **Performance & Optimization** - Use Next.js built-ins (Image, Font, lazy loading)
 
+## Active Feature: Expense Tracking App (Branch: 001-basic-expense-tracking)
+
+### Feature Overview
+Personal expense tracking application with add, view, and delete functionality. No authentication - single-user, client-side only.
+
+### Technical Stack
+- **Storage**: localStorage (client-side persistence)
+- **State**: React useState + useEffect (no external state library)
+- **Validation**: HTML5 + TypeScript type guards
+- **Testing**: Jest + React Testing Library
+
+### Key Data Types
+```typescript
+type ExpenseCategory = 'Food' | 'Transport' | 'Entertainment' | 'Utilities' | 'Healthcare' | 'Other';
+
+interface Expense {
+  id: string;           // UUID v4
+  amount: number;       // Positive, max 2 decimals
+  date: string;         // ISO 8601 (YYYY-MM-DD)
+  category: ExpenseCategory;
+  description?: string; // Optional
+  createdAt: string;    // ISO 8601 timestamp
+}
+```
+
+### Component Architecture
+- `src/app/page.tsx` - Main dashboard (Client Component)
+- `src/components/expenses/ExpenseForm.tsx` - Add expense form
+- `src/components/expenses/ExpenseList.tsx` - Display all expenses
+- `src/components/expenses/ExpenseSummary.tsx` - Display totals
+- `src/server/storage/expense-storage.ts` - localStorage operations
+- `src/server/utils/calculations.ts` - Total calculations
+- `src/server/types/expense.ts` - TypeScript interfaces
+
+### Business Rules
+- Categories: Fixed set of 6 (no custom categories)
+- Sorting: Newest first (by date)
+- Totals: Overall, by category, current month, last 7 days
+- Validation: Amount must be positive, date and category required
+- Future dates: Allowed
+
+### Implementation Notes
+- All expenses stored in localStorage under key `"expenses"` as JSON array
+- Calculations run on-demand (use useMemo for performance)
+- No edit functionality (v1 scope - add/delete only)
+- Immutable expense records
+
+### Feature Documentation
+- Spec: `specs/001-basic-expense-tracking/spec.md`
+- Plan: `specs/001-basic-expense-tracking/plan.md`
+- Research: `specs/001-basic-expense-tracking/research.md`
+- Data Model: `specs/001-basic-expense-tracking/data-model.md`
+- Quickstart: `specs/001-basic-expense-tracking/quickstart.md`
+
+---
+
 ## Notes
 - All builds and dev commands use Turbopack (`--turbopack` flag)
 - The project uses Tailwind CSS v4 with PostCSS
